@@ -26,7 +26,21 @@ funcionalidades AI**
 ## 📸 Preview
 
 <div align="center">
-  <img src="https://via.placeholder.com/800x450/0ea5e9/ffffff?text=DevOps+Shop+Preview" alt="DevOps Shop Preview" width="800"/>
+
+**✨ Catálogo de Productos**
+
+El proyecto incluye:
+
+- 🛍️ Catálogo completo con productos
+- 🔍 Búsqueda en tiempo real
+- 🎤 Voice Search (español)
+- 🌙 Dark Mode
+- 🛒 Carrito persistente
+- 💳 Checkout con Stripe
+
+> **Nota**: Para ver el proyecto en acción, ejecuta `npm run dev` y abre
+> `http://localhost:3000`
+
 </div>
 
 ---
@@ -162,12 +176,12 @@ El proyecto estará disponible en `http://localhost:3000`
 
 ```json
 {
-    "react": "^18.2.0",
-    "@reduxjs/toolkit": "^2.11.2",
-    "@stripe/react-stripe-js": "^5.4.1",
-    "framer-motion": "^12.23.26",
-    "react-router-dom": "^7.11.0",
-    "lucide-react": "^0.562.0"
+  "react": "^18.2.0",
+  "@reduxjs/toolkit": "^2.11.2",
+  "@stripe/react-stripe-js": "^5.4.1",
+  "framer-motion": "^12.23.26",
+  "react-router-dom": "^7.11.0",
+  "lucide-react": "^0.562.0"
 }
 ```
 
@@ -224,18 +238,18 @@ Búsqueda por voz usando Web Speech API con reconocimiento en español:
 
 ```typescript
 const handleVoiceSearch = () => {
-    const SpeechRecognition = window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.lang = "es-ES";
-    recognition.continuous = false;
+  const SpeechRecognition = window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+  recognition.lang = "es-ES";
+  recognition.continuous = false;
 
-    recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        setSearchTerm(transcript);
-    };
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    setSearchTerm(transcript);
+  };
 
-    recognition.start();
+  recognition.start();
 };
 ```
 
@@ -250,10 +264,10 @@ Toggle completo con persistencia en LocalStorage:
 
 ```typescript
 const toggleTheme = () => {
-    const newDark = !isDark;
-    setIsDark(newDark);
-    localStorage.setItem("theme", newDark ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", newDark);
+  const newDark = !isDark;
+  setIsDark(newDark);
+  localStorage.setItem("theme", newDark ? "dark" : "light");
+  document.documentElement.classList.toggle("dark", newDark);
 };
 ```
 
@@ -267,10 +281,10 @@ Notificaciones elegantes con Framer Motion:
 
 ```tsx
 <Toast
-    message="¡Producto añadido al carrito!"
-    type="success"
-    isVisible={showToast}
-    onClose={() => setShowToast(false)}
+  message="¡Producto añadido al carrito!"
+  type="success"
+  isVisible={showToast}
+  onClose={() => setShowToast(false)}
 />;
 ```
 
@@ -285,13 +299,13 @@ El carrito se guarda automáticamente en LocalStorage:
 ```typescript
 // En cartSlice.ts
 const saveToLocalStorage = (state: CartState) => {
-    localStorage.setItem("cart", JSON.stringify(state.items));
+  localStorage.setItem("cart", JSON.stringify(state.items));
 };
 
 // Se ejecuta en cada acción del carrito
 addToCart: ((state, action) => {
-    // ... lógica
-    saveToLocalStorage(state);
+  // ... lógica
+  saveToLocalStorage(state);
 });
 ```
 
@@ -329,15 +343,15 @@ src/
 
 ```typescript
 describe("Cart Slice", () => {
-    it("should add item to cart", () => {
-        const initialState = { items: [], total: 0 };
-        const product = { id: 1, title: "Test", price: 100 };
+  it("should add item to cart", () => {
+    const initialState = { items: [], total: 0 };
+    const product = { id: 1, title: "Test", price: 100 };
 
-        const newState = cartReducer(initialState, addToCart(product));
+    const newState = cartReducer(initialState, addToCart(product));
 
-        expect(newState.items).toHaveLength(1);
-        expect(newState.total).toBe(100);
-    });
+    expect(newState.items).toHaveLength(1);
+    expect(newState.total).toBe(100);
+  });
 });
 ```
 
