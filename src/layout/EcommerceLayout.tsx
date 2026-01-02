@@ -1,13 +1,13 @@
-import { Provider, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
-import { ShoppingCart, Cpu, User, LogOut, X, Moon, Sun } from 'lucide-react';
+import { ShoppingCart, Cpu, User, LogOut, Moon, Sun } from 'lucide-react';
 import { store, RootState } from '../store/store';
 import { toggleCart } from '../store/cartSlice';
 import { logout } from '../store/authSlice';
 import CartSidebar from '../components/CartSidebar';
 import AuthModal from '../components/AuthModal';
 import { useState, useEffect } from 'react';
-import ScrollToTop from '../../../../components/ScrollToTop';
+import ScrollToTop from '../components/ScrollToTop';
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ function Navbar() {
       <nav className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <Link to="/proyectos/ecommerce" className="flex items-center gap-2 group">
+            <Link to="/" className="flex items-center gap-2 group">
               <div className="bg-slate-900 dark:bg-indigo-600 p-2 rounded-lg group-hover:bg-indigo-600 transition-colors">
                 <Cpu className="w-5 h-5 text-white" />
               </div>
@@ -40,9 +40,9 @@ function Navbar() {
             </Link>
 
             <div className="flex items-center gap-4">
-              <Link to="/" className="text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors hidden md:block">
-                ← Portfolio
-              </Link>
+            <Link to="/" className="text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors hidden md:block">
+              ← Inicio
+            </Link>
               
               <div className="h-6 w-px bg-slate-200 dark:bg-slate-700 hidden md:block" />
 
@@ -103,13 +103,10 @@ function Navbar() {
 export default function EcommerceLayout() {
   useEffect(() => {
     document.title = "Catálogo | DevOps Shop";
-    return () => {
-      document.title = "ZeroCode | David G. - AI-First Developer";
-    };
   }, []);
 
   return (
-    <Provider store={store}>
+    <>
       <ScrollToTop />
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 transition-colors">
         <Navbar />
@@ -118,6 +115,6 @@ export default function EcommerceLayout() {
         </main>
         <CartSidebar />
       </div>
-    </Provider>
+    </>
   );
 }
