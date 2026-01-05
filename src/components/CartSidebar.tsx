@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import { X, Plus, Minus, Trash2, CreditCard } from 'lucide-react';
 import { RootState } from '../store/store';
-import { toggleCart, removeFromCart, updateQuantity, clearCart } from '../store/cartSlice'; // Keep clearCart for checkout logic if needed
+import { toggleCart, removeFromCart, updateQuantity } from '../store/cartSlice'; // Keep clearCart check checking import
 import { Link } from 'react-router-dom';
 
 export default function CartSidebar() {

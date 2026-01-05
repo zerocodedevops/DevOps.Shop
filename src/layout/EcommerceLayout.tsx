@@ -1,16 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import { ShoppingCart, Cpu, User, LogOut, Moon, Sun } from 'lucide-react';
-import { store, RootState } from '../store/store';
+import { RootState } from '../store/store';
 import { toggleCart } from '../store/cartSlice';
 import { logout } from '../store/authSlice';
 import CartSidebar from '../components/CartSidebar';
 import AuthModal from '../components/AuthModal';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import ScrollToTop from '../components/ScrollToTop';
 
 function Navbar() {
   const dispatch = useDispatch();
+  const { i18n } = useTranslation();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -54,6 +56,23 @@ function Navbar() {
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
+
+
+              {/* Language Toggle */}
+              <div className="flex items-center gap-1 border border-slate-200 dark:border-slate-700 rounded-lg p-1 mr-2">
+                <button
+                  onClick={() => i18n.changeLanguage('es')}
+                  className={`px-2 py-1 text-xs font-medium rounded transition-colors ${i18n.language === 'es' ? 'bg-indigo-600 text-white' : 'text-slate-500 hover:text-indigo-600 dark:text-slate-400'}`}
+                >
+                  ES
+                </button>
+                <button
+                  onClick={() => i18n.changeLanguage('en')}
+                  className={`px-2 py-1 text-xs font-medium rounded transition-colors ${i18n.language === 'en' ? 'bg-indigo-600 text-white' : 'text-slate-500 hover:text-indigo-600 dark:text-slate-400'}`}
+                >
+                  EN
+                </button>
+              </div>
 
               {/* Auth Button */}
               {isAuthenticated && user ? (
